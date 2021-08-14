@@ -1,1 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
+.DS_Store
+.idea/.gitignore
+.idea/RL2-legends.iml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+env/
