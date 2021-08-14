@@ -1,9 +1,8 @@
-from django.http import HttpResponse
-from django.views.generic import View
+from .core.class_utils import BaseView
 
 
-class QuestionList(View):
+class QuestionList(BaseView):
     """ Question requests controller """
 
     def get(self, request):
-        return HttpResponse('hello')
+        return {'message': 'good'}
