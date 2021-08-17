@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.shortcuts import get_object_or_404
 
 
 class QuestionManager(models.Manager):
@@ -8,6 +9,10 @@ class QuestionManager(models.Manager):
     def get_queryset(self):
         """ Override get_queryset method from BaseManager """
         return super().get_queryset()
+
+    def find_by_id(self, pk):
+        """ Retrieve one question by id """
+        return get_object_or_404(self.get_queryset(), pk=pk)
 
     def find_by_complexity(self, complexity_level):
         """ Find all questions by complexity: H, M, E """
