@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
 
@@ -32,8 +33,19 @@ class Category(models.Model):
         return obj.pk
 
 
+class UserManager(models.Manager):
+    """ Manager for User model """
+
+    ADMIN_ID = 1  # PK of my user
+
+    @classmethod
+    def get_default_user(cls):
+        """ Get first user 'megamot' """
+        return User.objects.filter(pk=cls.ADMIN_ID)[0].pk
+
+
 class QuestionManager(models.Manager):
-    """ Manager for question model """
+    """ Manager for Question model """
 
     def get_queryset(self):
         """ Override get_queryset method from BaseManager """
@@ -79,6 +91,13 @@ class Question(models.Model):
     complexity = models.CharField(
         max_length=1,
         choices=COMPLEXITY_TYPES
+    )
+    question_author = models.ForeignKey(
+        User,
+        on_delete=models.SET_DEFAULT,
+        default=UserManager.get_default_user,
+        blank=True,
+        verbose_name='which user the question belongs to'
     )
     category = models.ForeignKey(
         Category,
