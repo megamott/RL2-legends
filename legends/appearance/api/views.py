@@ -25,4 +25,14 @@ class QuestionCategoryViewSet(BaseView, ModelViewSet):
     """ ViewSet that for listing or retrieving QuestionCategory """
 
     queryset = QuestionCategory.objects.all()
-    serializer_class = QuestionCategoryDetailsSerializer
+    serializer_class = QuestionCategorySerializer
+
+    action_to_serializer = {
+        'retrieve': QuestionCategoryDetailsSerializer
+    }
+
+    def get_serializer_class(self):
+        return self.action_to_serializer.get(
+            self.action,
+            self.serializer_class
+        )
