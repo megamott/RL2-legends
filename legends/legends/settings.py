@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'legends.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'RL2',
+        'NAME': 'RL2l',
         'USER': 'postgres',
         'PASSWORD': 'Mottim99',
         'HOST': 'localhost',

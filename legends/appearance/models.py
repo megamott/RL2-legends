@@ -3,6 +3,35 @@ from django.contrib.postgres.fields import ArrayField
 from django.shortcuts import get_object_or_404
 
 
+class Category(models.Model):
+    """ Categories of questions """
+
+    category_name = models.CharField(
+        max_length=50,
+        verbose_name='name of category, like Преподаватели'
+    )
+    parent = models.ForeignKey(
+        'self',
+        on_delete=models.PROTECT,
+        blank=True,
+        null=True,
+        verbose_name='parent category, to achieve nesting of categories'
+    )
+
+    def __str__(self):
+        return self.category_name
+
+    class Meta:
+        verbose_name = 'category'
+        verbose_name_plural = 'Categories'
+
+    @classmethod
+    def get_default_pk(cls):
+        """ Default value of Category model for .SET_DEFAULT behavior in models with FK """
+        obj, created = cls.objects.get_or_create(category_name='Без категории')
+        return obj.pk
+
+
 class QuestionManager(models.Manager):
     """ Manager for question model """
 
@@ -51,20 +80,23 @@ class Question(models.Model):
         max_length=1,
         choices=COMPLEXITY_TYPES
     )
-    group = models.CharField(
-        max_length=200,
-        default='Общие знания',
-        verbose_name='which group the question belongs to'
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.SET_DEFAULT,
+        default=Category.get_default_pk,
+        blank=True,
+        verbose_name='which category the question belongs to'
     )
     hint = models.CharField(
         max_length=200,
+        blank=True,
         null=True,
         verbose_name='a hint to a question to help answer it'
     )
     objects = QuestionManager()
 
-    def __repr__(self):
-        return self.question_text
+    def __str__(self):
+        return f'{self.question_text}, ({self.category})'
 
     class Meta:
         verbose_name = 'question'
