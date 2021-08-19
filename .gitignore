@@ -1,9 +1,50 @@
-# Created by .ignore support plugin (hsz.mobi)
+*.pyc
+/db.sqlite3
 .DS_Store
-.idea/.gitignore
-.idea/RL2-legends.iml
-.idea/inspectionProfiles/
-.idea/misc.xml
-.idea/modules.xml
-.idea/vcs.xml
-env/
+.env
+*/settings/local.py
+/staticfiles/*
+/mediafiles/*
+__pycache__/
+/.vscode/
+
+# coverage result
+.coverage
+/coverage/
+
+# pycharm
+.idea/
+
+# data
+*.dump
+./legends/static/*
+./legends/db.sqlite3
+
+# npm
+node_modules/
+npm-debug.log
+package-lock.json
+
+# Webpack
+/frontend/bundles/*
+/frontend/webpack_bundles/*
+/webpack-stats.json
+
+# Sass
+.sass-cache
+*.map
+
+# General
+/{{project_name}}-venv/
+/venv/
+/env/
+/output/
+/cache/
+boilerplate.zip
+
+# Spritesmith
+spritesmith-generated/
+spritesmith.scss
+
+# templated email
+tmp_email/
