@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (
     Question,
-    Category
+    QuestionCategory
 )
 
 
@@ -16,4 +16,4 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Question, QuestionAdmin)
-admin.site.register(Category, CategoryAdmin)
+admin.site.register(QuestionCategory, CategoryAdmin)

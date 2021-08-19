@@ -1,8 +1,17 @@
 from rest_framework.viewsets import ModelViewSet
 
-from .serializers import QuestionSerializer
 from ..core.class_utils import BaseView
-from ..models import Question
+
+from .serializers import (
+    QuestionSerializer,
+    QuestionCategorySerializer,
+    QuestionCategoryDetailsSerializer
+)
+
+from ..models import (
+    Question,
+    QuestionCategory
+)
 
 
 class QuestionViewSet(BaseView, ModelViewSet):
@@ -10,3 +19,10 @@ class QuestionViewSet(BaseView, ModelViewSet):
 
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
+
+
+class QuestionCategoryViewSet(BaseView, ModelViewSet):
+    """ ViewSet that for listing or retrieving QuestionCategory """
+
+    queryset = QuestionCategory.objects.all()
+    serializer_class = QuestionCategoryDetailsSerializer

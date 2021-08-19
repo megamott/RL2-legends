@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
 
-class Category(models.Model):
+class QuestionCategory(models.Model):
     """ Categories of questions """
 
     category_name = models.CharField(
@@ -28,7 +28,7 @@ class Category(models.Model):
 
     @classmethod
     def get_default_pk(cls):
-        """ Default value of Category model for .SET_DEFAULT behavior in models with FK """
+        """ Default value of QuestionCategory model for .SET_DEFAULT behavior in models with FK """
         obj, created = cls.objects.get_or_create(category_name='Без категории')
         return obj.pk
 
@@ -59,12 +59,12 @@ class QuestionManager(models.Manager):
         """ Find all questions by complexity: H, M, E """
         return self.get_queryset().filter(complexity=complexity_level)
 
-    def find_by_group(self, group_name):
+    def find_by_category(self, category):
         """
-        Find all questions by group
-        Example: find_by_group('Общие знания')
+        Find all questions by category
+        Example: find_by_category('Общие знания')
         """
-        return self.get_queryset().filter(group=group_name)
+        return self.get_queryset().filter(category=category)
 
 
 class Question(models.Model):
@@ -100,9 +100,9 @@ class Question(models.Model):
         verbose_name='which user the question belongs to'
     )
     category = models.ForeignKey(
-        Category,
+        QuestionCategory,
         on_delete=models.SET_DEFAULT,
-        default=Category.get_default_pk,
+        default=QuestionCategory.get_default_pk,
         blank=True,
         verbose_name='which category the question belongs to'
     )
