@@ -20,7 +20,7 @@ class QuestionCategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = QuestionCategory
-        fields = ['id', 'category_name', 'parent', 'questions']
+        fields = ['id', 'category_name', 'parent', 'questions', 'slug']
 
 
 class QuestionCategoryDetailSerializer(serializers.ModelSerializer):

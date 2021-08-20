@@ -1,14 +1,19 @@
 import React from "react";
+import {BrowserRouter, Route} from "react-router-dom";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Quest from "./appearance/Quest";
+import CategoryList from "./appearance/CategoryList";
+import QuestionList from "./appearance/QueistionList";
 
 function App() {
-  return (
-    <div className="App">
-        <Quest />
-    </div>
-  );
+    return (
+        <BrowserRouter>
+            <div className="App">
+                <Route path="/" component={CategoryList}/>
+                <Route path="/toes" component={QuestionList}/>
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;
