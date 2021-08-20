@@ -6,7 +6,7 @@ from .models import (
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'question_name', 'question_text', 'question_answers', 'category', 'complexity', 'hint')
+    list_display = ('id', 'question_name', 'question_text', 'question_answers', 'true_answer', 'category', 'complexity', 'hint')
     list_display_links = ('id', 'question_name', 'category')
     search_fields = ('title', 'question_name', 'complexity', 'category')
 

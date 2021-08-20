@@ -102,12 +102,17 @@ class Question(models.Model):
         size=4,
         verbose_name='list of four answers for the question'
     )
+    true_answer = models.CharField(
+        max_length=128,
+        verbose_name='true answer to a question, "question answers" contains it'
+    )
     complexity = models.CharField(
         max_length=1,
         choices=COMPLEXITY_TYPES
     )
     question_author = models.ForeignKey(
         User,
+        related_name='questions',
         db_index=True,
         on_delete=models.SET_DEFAULT,
         default=UserManager.get_default_user,
@@ -116,6 +121,7 @@ class Question(models.Model):
     )
     category = models.ForeignKey(
         QuestionCategory,
+        related_name='questions',
         db_index=True,
         on_delete=models.SET_DEFAULT,
         default=QuestionCategory.get_default_pk,

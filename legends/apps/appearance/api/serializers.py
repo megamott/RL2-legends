@@ -7,6 +7,7 @@ from ..models import (
 
 class QuestionSerializer(serializers.ModelSerializer):
     """ Simple question serializer """
+
     class Meta:
         model = Question
         fields = '__all__'
@@ -14,21 +15,24 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 class QuestionCategorySerializer(serializers.ModelSerializer):
     """ Simple question category serializer """
+
+    questions = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = QuestionCategory
-        fields = '__all__'
+        fields = ['id', 'category_name', 'parent', 'questions']
 
 
-class QuestionCategoryDetailsSerializer(serializers.ModelSerializer):
-    """ Question category serializer with questions belonging to categories """
+class QuestionCategoryDetailSerializer(serializers.ModelSerializer):
+    """ Question category serializer with all questions details belonging to categories """
 
-    questions = serializers.SerializerMethodField()
+    question_details = serializers.SerializerMethodField()
 
     class Meta:
         model = QuestionCategory
         fields = '__all__'
 
     @staticmethod
-    def get_questions(obj):
+    def get_question_details(obj):
         """ List of questions belonging to the category """
         return QuestionSerializer(Question.objects.find_by_category(obj), many=True).data

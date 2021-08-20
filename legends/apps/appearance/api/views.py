@@ -5,7 +5,7 @@ from legends.apps.core.class_utils import BaseView
 from .serializers import (
     QuestionSerializer,
     QuestionCategorySerializer,
-    QuestionCategoryDetailsSerializer
+    QuestionCategoryDetailSerializer
 )
 
 from ..models import (
@@ -30,7 +30,7 @@ class QuestionCategoryViewSet(BaseView, ModelViewSet):
     serializer_class = QuestionCategorySerializer
 
     action_to_serializer = {
-        'retrieve': QuestionCategoryDetailsSerializer
+        'retrieve': QuestionCategoryDetailSerializer
     }
 
     def get_serializer_class(self):
