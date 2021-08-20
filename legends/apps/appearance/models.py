@@ -7,8 +7,15 @@ from django.shortcuts import get_object_or_404
 class QuestionCategory(models.Model):
     """ Categories of questions """
 
+    slug = models.SlugField(
+        db_index=True,
+        max_length=255,
+        unique=True
+    )
     category_name = models.CharField(
-        max_length=50,
+        db_index=True,
+        max_length=64,
+        unique=True,
         verbose_name='name of category, like Преподаватели'
     )
     parent = models.ForeignKey(
@@ -76,15 +83,22 @@ class Question(models.Model):
         ('E', 'easy'),
     )
 
+    slug = models.SlugField(
+        db_index=True,
+        max_length=255,
+        unique=True
+    )
     question_name = models.CharField(
-        max_length=200,
+        db_index=True,
+        max_length=255,
+        unique=True,
         verbose_name='question name, describing its essence'
     )
     question_text = models.CharField(
-        max_length=200
+        max_length=255
     )
     question_answers = ArrayField(
-        models.CharField(max_length=100),
+        models.CharField(max_length=128),
         size=4,
         verbose_name='list of four answers for the question'
     )
@@ -94,6 +108,7 @@ class Question(models.Model):
     )
     question_author = models.ForeignKey(
         User,
+        db_index=True,
         on_delete=models.SET_DEFAULT,
         default=UserManager.get_default_user,
         blank=True,
@@ -101,13 +116,14 @@ class Question(models.Model):
     )
     category = models.ForeignKey(
         QuestionCategory,
+        db_index=True,
         on_delete=models.SET_DEFAULT,
         default=QuestionCategory.get_default_pk,
         blank=True,
         verbose_name='which category the question belongs to'
     )
     hint = models.CharField(
-        max_length=200,
+        max_length=255,
         blank=True,
         null=True,
         verbose_name='a hint to a question to help answer it'

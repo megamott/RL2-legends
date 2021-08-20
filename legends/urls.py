@@ -8,8 +8,7 @@ from django.urls import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('appearance.urls')),
-    path('api/', include('appearance.api.urls'))
+    path('api/', include('legends.apps.appearance.api.urls'))
 ]
 
 if settings.DEBUG:

@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 
-from ..core.class_utils import BaseView
+from legends.apps.core.class_utils import BaseView
 
 from .serializers import (
     QuestionSerializer,
@@ -17,6 +17,7 @@ from ..models import (
 class QuestionViewSet(BaseView, ModelViewSet):
     """ ViewSet that for listing or retrieving Question """
 
+    lookup_field = 'slug'
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
 
@@ -24,6 +25,7 @@ class QuestionViewSet(BaseView, ModelViewSet):
 class QuestionCategoryViewSet(BaseView, ModelViewSet):
     """ ViewSet that for listing or retrieving QuestionCategory """
 
+    lookup_field = 'slug'
     queryset = QuestionCategory.objects.all()
     serializer_class = QuestionCategorySerializer
 
