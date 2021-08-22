@@ -26,7 +26,6 @@ function QuestionList() {
                     <li className="list-group-item">
                         {question.question_answers}
                     </li>
-
                 </ul>
             )}
         </div>
