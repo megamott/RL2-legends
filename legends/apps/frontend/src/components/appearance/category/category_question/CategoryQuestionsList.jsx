@@ -16,8 +16,6 @@ const CategoryQuestionList = (props) => {
             )
     }, []);
 
-    console.log(categories)
-
     return (
         <div className="CategoryList">
             {categories.map(category =>
