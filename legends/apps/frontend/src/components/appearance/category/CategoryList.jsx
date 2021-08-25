@@ -5,9 +5,14 @@ import CategoryQuestionList from "./category_question/CategoryQuestionsList";
 
 const CategoryList = (props) => {
 
+    const routeComponents = []
+    props.state.categoryQuestionList.questionsInCategory.forEach((value, key) =>
+        routeComponents.push(<Route exact path={`/${key}`} render={() => <CategoryQuestionList questions={value}/>}/>)
+    )
+
     return (
         <div className="CategoryList category">
-            {props.categories.map(category =>
+            {props.state.categoryListPage.categories.map(category =>
                 <ul className="list-group-item">
                     <NavLink to={category.slug}>
                         <li className="list-group-item list-group-item-info">
@@ -16,10 +21,7 @@ const CategoryList = (props) => {
                     </NavLink>
                 </ul>
             )}
-            <Route path="/optics" render={() => <CategoryQuestionList category='optics'/>}/>
-            <Route path="/toes" render={() => <CategoryQuestionList category='toes'/>}/>
-            <Route path="/without-category" render={() => <CategoryQuestionList category='without-category'/>}/>
-            <Route path="/professors" render={() => <CategoryQuestionList category='professors'/>}/>
+            {routeComponents}
         </div>
     );
 }
