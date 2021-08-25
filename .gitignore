@@ -15,7 +15,7 @@ __pycache__/
 # pycharm
 .idea/
 
-# data
+# service
 *.dump
 legendss/static
 db.sqlite3

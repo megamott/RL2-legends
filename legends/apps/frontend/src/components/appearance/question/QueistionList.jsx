@@ -1,21 +1,11 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
 
-function QuestionList() {
-
-    const [questions, setQuestions] = useState([])
-
-    useEffect(() => {
-        axios.get(`http://127.0.0.1:8000/api/questions/`)
-            .then(res => {
-                setQuestions(res.data)
-            })
-    }, []);
+function QuestionList(props) {
 
     return (
         <div className="QuestionList">
-            {questions.map(question =>
+            {props.questions.map(question =>
                 <ul className="list-group list-group-horizontal">
                     <li className="list-group-item">
                         {question.question_name}

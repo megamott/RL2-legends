@@ -4,6 +4,18 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
 
+class QuestionCategoryManager(models.Manager):
+    """ Manager for QuestionCategory model """
+
+    def get_queryset(self):
+        """ Override get_queryset method from BaseManager """
+        return super().get_queryset()
+
+    def find_by_category(self, category):
+        """ Retrieve one question by id """
+        return get_object_or_404(self.get_queryset(), pk=category.id)
+
+
 class QuestionCategory(models.Model):
     """ Categories of questions """
 
@@ -25,6 +37,8 @@ class QuestionCategory(models.Model):
         null=True,
         verbose_name='parent category, to achieve nesting of categories'
     )
+
+    objects = QuestionCategoryManager()
 
     def __str__(self):
         return self.category_name
@@ -134,6 +148,7 @@ class Question(models.Model):
         null=True,
         verbose_name='a hint to a question to help answer it'
     )
+
     objects = QuestionManager()
 
     def __str__(self):

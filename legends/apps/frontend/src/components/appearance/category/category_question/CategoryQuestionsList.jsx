@@ -1,6 +1,6 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import GetCategoryQuestionList from "../../../../data/GetCategoryQuestions";
+import GetCategoryQuestionList from "../../../../service/requests/GetCategoryQuestions";
 
 const CategoryQuestionList = (props) => {
 

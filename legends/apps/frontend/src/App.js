@@ -4,7 +4,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from "./components/navigation/NavBar"
 import CategoryList from "./components/appearance/category/CategoryList";
-import GetCategories from "./data/GetCategories";
+import GetCategories from "./service/requests/GetCategories";
 
 function App() {
 

@@ -3,8 +3,8 @@ from rest_framework.viewsets import ModelViewSet
 from legends.apps.core.class_utils import BaseView
 
 from .serializers import (
-    QuestionSerializer,
-    QuestionCategorySerializer,
+    QuestionWithCategoryNameSerializer,
+    QuestionCategoryWithQuestionsSerializer,
     QuestionCategoryDetailSerializer
 )
 
@@ -19,7 +19,7 @@ class QuestionViewSet(BaseView, ModelViewSet):
 
     lookup_field = 'slug'
     queryset = Question.objects.all()
-    serializer_class = QuestionSerializer
+    serializer_class = QuestionWithCategoryNameSerializer
 
 
 class QuestionCategoryViewSet(BaseView, ModelViewSet):
@@ -27,7 +27,7 @@ class QuestionCategoryViewSet(BaseView, ModelViewSet):
 
     lookup_field = 'slug'
     queryset = QuestionCategory.objects.all()
-    serializer_class = QuestionCategorySerializer
+    serializer_class = QuestionCategoryWithQuestionsSerializer
 
     action_to_serializer = {
         'retrieve': QuestionCategoryDetailSerializer
