@@ -1,23 +1,13 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
 import {NavLink, Route} from "react-router-dom";
 import CategoryQuestionList from "./category_question/CategoryQuestionsList";
 
-function CategoryList() {
-
-    const [categories, setCategories] = useState([])
-
-    useEffect(() => {
-        axios.get(`http://127.0.0.1:8000/api/categories/`)
-            .then(res => {
-                setCategories(res.data)
-            })
-    }, []);
+const CategoryList = (props) => {
 
     return (
         <div className="CategoryList category">
-            {categories.map(category =>
+            {props.categories.map(category =>
                 <ul className="list-group-item">
                     <NavLink to={category.slug}>
                         <li className="list-group-item list-group-item-info">

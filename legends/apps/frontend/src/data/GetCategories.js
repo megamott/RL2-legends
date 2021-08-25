@@ -1,21 +1,18 @@
-import React, {useEffect, useState} from "react";
-import axios from 'axios';
+import {useEffect, useState} from "react";
+import axios from "axios";
 
-const CategoryQuestionList = (props) => {
+const GetCategories = () => {
 
     const [categories, setCategories] = useState([])
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:8000/api/categories/${props.category}/`)
+        axios.get(`http://127.0.0.1:8000/api/categories/`)
             .then(res => {
-                return res.data
+                setCategories(res.data)
             })
-            .then(res =>
-                setCategories(res.question_details)
-            )
     }, []);
 
     return categories
 }
 
-export default CategoryQuestionList;
+export default GetCategories
