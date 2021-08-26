@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'legends.apps.appearance.apps.AppearanceConfig',
+    'legends.apps.professor_rating.apps.ProfessorRatingConfig',
     'legends.apps.core',
 ]
 
@@ -143,3 +144,6 @@ CORS_ORIGIN_WHITELIST = (
 # MEDIA
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# RATING
+RATINGS_VOTES_PER_IP = 1
